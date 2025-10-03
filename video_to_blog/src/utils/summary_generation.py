@@ -1,4 +1,4 @@
-from llm import llm_call
+from utils.llm import llm_call
 
 def summary_generation(transcript):
     prompt=f'''Read the below given transcript carefully and generate appropriate title for the it with label TITLE 
