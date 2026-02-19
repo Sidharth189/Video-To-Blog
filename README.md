@@ -49,4 +49,22 @@ This will generate a blog post from the specified video transcript.
 ## Deployment
 To deploy the project, you can use a Python web framework such as Flask or Django to create a RESTful API that accepts video IDs and returns generated blog posts.
 
+### Example Deployment using Flask
+```python
+from flask import Flask, request, jsonify
+from workflow import graph
+
+app = Flask(__name__)
+
+@app.route('/generate_blog', methods=['POST'])
+def generate_blog():
+    video_id = request.json['video_id']
+    blog_post = graph.invoke({'video_id': video_id})['blog']
+    return jsonify({'blog_post': blog_post})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+This example creates a Flask API that accepts a `video_id` in the request body and returns the generated blog post in the response.
+
 Note: This project requires a compatible LLaMA model and a `.env` file with the required environment variables. Make sure to update the `requirements.txt` file and the `.env` file accordingly.
